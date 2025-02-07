@@ -38,8 +38,3 @@ helm upgrade -n datamesh-manager datamesh-manager .
 ```bash
 helm uninstall -n datamesh-manager datamesh-manager
 ```
-
-## Todos
-- Add Health Check paths
-- Add realistic ressource limits and requests
-- remove postgres, as it can be provided in any other way than this chart

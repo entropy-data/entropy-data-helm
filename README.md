@@ -7,6 +7,7 @@ This guide shows how to install [Data Mesh Manager](https://datamesh-manager.com
 
 Clone this repository
 ```
+git clone git@github.com:datamesh-manager/datamesh-manager-helm.git
 ```
 
 Create required secrets via bash or any secrets-management mechanism you prefer.

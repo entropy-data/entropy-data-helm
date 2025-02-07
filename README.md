@@ -10,7 +10,9 @@ kubectl create namespace datamesh-manager
 
 ```bash
 kubectl create secret -n datamesh-manager docker-registry datamesh-manager-registry \
---docker-server=ghcr.io \ --docker-username=<your-name> \ --docker-password=<your-password> 
+  --docker-server=ghcr.io \
+  --docker-username=<provided-username> \
+  --docker-password=<provided-password> 
 ```
 
 ```bash

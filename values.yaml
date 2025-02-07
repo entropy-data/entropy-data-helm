@@ -1,0 +1,55 @@
+replicaCount: 1
+
+image:
+  pullPolicy: IfNotPresent
+  registry: ghcr.io
+  registrySecretName: datamesh-manager-registry # create secret beforehand
+  name: ghcr.io/datamesh-manager/datamesh-manager-enterprise
+  tag: latest
+
+datameshmanager:
+  host: "https://datamesh-manager.example.com"
+
+database:
+  url: jdbc:postgresql://localhost:5432/postgres
+  secretName: datamesh-manager-database # create secret beforehand
+  usernameKey: username
+  passwordKey: password
+
+smtp:
+  host: smtp.example.com
+  port: "1025"
+  secretName: datamesh-manager-smtp # create secret beforehand
+  usernameKey: username
+  passwordKey: password
+
+resources:
+  limits:
+    cpu: 1
+    memory: 2Gi
+  requests:
+    cpu: 1
+    memory: 2Gi
+
+startupProbe:
+  httpGet:
+    path: /login
+    port: 8080
+  failureThreshold: 30
+  periodSeconds: 10
+livenessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  httpGet:
+    path: /login
+    port: 8080
+readinessProbe:
+  httpGet:
+    path: /login
+    port: 8080
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

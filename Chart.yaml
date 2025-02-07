@@ -1,0 +1,7 @@
+apiVersion: v1
+name: datamesh-manager-enterprise
+version: 1.0.0
+appVersion: v1.0
+home: https://www.datamesh-manager.com/
+keywords:
+  - datamesh-manager

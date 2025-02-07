@@ -36,7 +36,7 @@ kubectl create secret -n datamesh-manager generic datamesh-manager-smtp \
   --from-literal=password=<smtp-password>
 ```
 
-Adjest the `values.yaml` to your needs.
+Adjust the `values.yaml` to your needs.
 
 ```bash
 helm install -n datamesh-manager --create-namespace datamesh-manager .

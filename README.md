@@ -5,6 +5,10 @@ This guide shows how to install [Data Mesh Manager](https://datamesh-manager.com
 
 ## Installation
 
+Clone this repository
+```
+```
+
 Create required secrets via bash or any secrets-management mechanism you prefer.
 
 ```bash
@@ -16,9 +20,7 @@ kubectl create secret -n datamesh-manager docker-registry datamesh-manager-regis
   --docker-server=ghcr.io \
   --docker-username=<provided-username> \
   --docker-password=<provided-password> 
-```
 
-```bash
 kubectl create secret -n datamesh-manager generic datamesh-manager-database \
   --from-literal=username=<database-username> \
   --from-literal=password=<database-password>

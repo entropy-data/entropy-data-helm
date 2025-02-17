@@ -15,28 +15,40 @@ git clone git@github.com:datamesh-manager/datamesh-manager-helm.git
 cd datamesh-manager-helm
 ```
 
-Create required secrets via bash or any secrets-management mechanism you prefer.
+Create a namespace for datamesh-manager in Kubernetes:
 
 ```bash
 kubectl create namespace datamesh-manager
 ```
+
+Create a secret with the provided container registry credentials:
 
 ```bash
 kubectl create secret -n datamesh-manager docker-registry datamesh-manager-registry \
   --docker-server=ghcr.io \
   --docker-username=<provided-username> \
   --docker-password=<provided-password> 
+```
 
+Create a secret with the Postgres credentials:
+
+```bash
 kubectl create secret -n datamesh-manager generic datamesh-manager-database \
   --from-literal=username=<database-username> \
   --from-literal=password=<database-password>
+```
 
+Create a secret with the SMTP credentials:
+
+```bash
 kubectl create secret -n datamesh-manager generic datamesh-manager-smtp \
   --from-literal=username=<smtp-username> \
   --from-literal=password=<smtp-password>
 ```
 
 Adjust the `values.yaml` to your needs.
+
+Use Helm to install Data Mesh Manager to Kubernetes:
 
 ```bash
 helm install -n datamesh-manager --create-namespace datamesh-manager .

@@ -5,13 +5,13 @@ image:
   registry: ghcr.io
   registrySecretName: datamesh-manager-registry # create secret beforehand
   name: ghcr.io/datamesh-manager/datamesh-manager-enterprise
-  tag: latest
+  tag: 1.4.11
 
 datameshmanager:
   host: "https://datamesh-manager.example.com"
 
 database:
-  url: jdbc:postgresql://localhost:5432/postgres
+  url: jdbc:postgresql://localhost:5432/postgres # change to your database URL
   secretName: datamesh-manager-database # create secret beforehand
   usernameKey: username
   passwordKey: password

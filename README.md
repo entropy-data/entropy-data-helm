@@ -70,7 +70,7 @@ helm uninstall -n datamesh-manager datamesh-manager
 ## Access
 
 The application is now accessible at the service endpoint under port 8080.
-Example: http://datamesh-manager.<your-dns-zone>:8080 or http://<service-ip-address>:8080
+Example: http://<service-ip-address>:8080
 
 ## Ingress
 

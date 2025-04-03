@@ -23,7 +23,7 @@ spec:
             - containerPort: 8080
           env:
             - name: DATAMESHMANAGER_HOST
-              value: {{ .Values.datameshmanager.schema }}://{{ .Values.datameshmanager.host }}
+              value: {{ .Values.datameshmanager.host }}
             - name: SPRING_DATASOURCE_URL
               value: {{ .Values.database.url }}
             - name: SPRING_DATASOURCE_USERNAME
@@ -50,6 +50,35 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.smtp.secretName }}
                   key: {{ .Values.smtp.passwordKey }}
+            {{- if .Values.sso.azure.enabled }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_AZURE_ISSUER_URI
+              value: {{ .Values.sso.azure.issuerUri }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AZURESSO_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.sso.azure.secretName }}
+                  key: {{ .Values.sso.azure.clientIdKey }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AZURESSO_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.sso.azure.secretName }}
+                  key: {{ .Values.sso.azure.clientSecretKey }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AZURESSO_PROVIDER
+              value: azure
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AZURESSO_AUTHORIZATION_GRANT_TYPE
+              value: authorization_code
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AZURESSO_REDIRECT_URI
+              value: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AZURESSO_CLIENT_AUTHENTICATION_METHOD
+              value: client_secret_basic
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AZURESSO_SCOPE
+              value: openid,profile,email
+            - name: APPLICATION_SSO_AZURE_HOSTS
+              value: {{ .Values.datameshmanager.host | trimPrefix "https://" | trimPrefix "http://" }}
+            {{- end }}
+            {{- if .Values.env }}
+            {{- toYaml .Values.env | nindent 12 }}
+            {{- end }}
           {{- if .Values.startupProbe }}
           startupProbe:
             {{- toYaml .Values.startupProbe | nindent 12 }}

@@ -23,6 +23,21 @@ smtp:
   usernameKey: username
   passwordKey: password
 
+sso:
+  azure:
+    enabled: false
+    issuerUri: "https://login.microsoftonline.com/cc62cfd7-babf-43fa-89c8-000000000000/v2.0"
+    secretName: datamesh-manager-azure-sso # create secret beforehand
+    clientIdKey: client-id
+    clientSecretKey: client-secret
+
+# Additional environment variables to be set in the deployment
+# Format:
+# env:
+#   - name: VARIABLE_NAME
+#     value: "variable-value"
+env: []
+
 resources:
   limits:
     cpu: 1

@@ -46,6 +46,15 @@ kubectl create secret -n datamesh-manager generic datamesh-manager-smtp \
   --from-literal=password=<smtp-password>
 ```
 
+If you want to enable Azure SSO authentication, create a secret with your application client secret:
+
+```bash
+kubectl create secret -n datamesh-manager generic datamesh-manager-azure-sso \
+  --from-literal=client-id=<azure-client-id> \
+  --from-literal=client-secret=<azure-client-secret>
+```
+
+
 Adjust the `values.yaml` to your needs.
 
 Use Helm to install Data Mesh Manager to Kubernetes:

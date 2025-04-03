@@ -7,8 +7,12 @@ image:
   name: ghcr.io/datamesh-manager/datamesh-manager-enterprise
   tag: 1.5.0
 
+service:
+  type: ClusterIP  # Can be ClusterIP, LoadBalancer, or NodePort
+  port: 8080
+
 datameshmanager:
-  host: "https://datamesh-manager.example.com"
+  host: https://datamesh-manager.example.com
 
 database:
   url: jdbc:postgresql://localhost:5432/postgres # change to your database URL

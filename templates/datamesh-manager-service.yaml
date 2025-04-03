@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: datamesh-manager
 spec:
-  type: LoadBalancer
+  type: {{ .Values.service.type }}
   ports:
-    - port: 8080
+    - port: {{ .Values.service.port }}
       protocol: TCP
+      targetPort: 8080
   selector:
     app: datamesh-manager

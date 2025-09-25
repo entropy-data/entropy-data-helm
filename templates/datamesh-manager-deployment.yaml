@@ -14,7 +14,9 @@ spec:
         app: datamesh-manager
     spec:
       imagePullSecrets:
+      {{- if .Values.image.registrySecretName }}
         - name: {{ .Values.image.registrySecretName }}
+      {{- end }}  
       containers:
         - name: datamesh-manager
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"

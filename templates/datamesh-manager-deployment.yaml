@@ -42,6 +42,7 @@ spec:
               value: {{ .Values.smtp.host }}
             - name: SPRING_MAIL_PORT
               value: {{ .Values.smtp.port | quote }}
+            {{- if .Values.smtp.secretName }}
             - name: SPRING_MAIL_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -52,6 +53,7 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.smtp.secretName }}
                   key: {{ .Values.smtp.passwordKey }}
+            {{- end }}      
             {{- if .Values.sso.azure.enabled }}
             - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_AZURE_ISSUER_URI
               value: {{ .Values.sso.azure.issuerUri }}

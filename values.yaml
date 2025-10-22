@@ -2,28 +2,26 @@ replicaCount: 1
 
 image:
   pullPolicy: IfNotPresent
-  registry: ghcr.io
-  registrySecretName: datamesh-manager-registry # create secret beforehand
-  name: ghcr.io/datamesh-manager/datamesh-manager-enterprise
-  tag: 1.5.0
+  name: entropydata/entropy-data-ce # use entropydata/entropy-data for enterprise version
+  tag: 1.7.4 # check latest version
 
 service:
   type: ClusterIP  # Can be ClusterIP, LoadBalancer, or NodePort
   port: 8080
 
-datameshmanager:
-  host: https://datamesh-manager.example.com
+entropydata:
+  host: https://entropy-data.example.com
 
 database:
   url: jdbc:postgresql://localhost:5432/postgres # change to your database URL
-  secretName: datamesh-manager-database # create secret beforehand
+  secretName: entropy-data-database # create secret beforehand
   usernameKey: username
   passwordKey: password
 
 smtp:
   host: smtp.example.com
   port: "1025"
-  secretName: datamesh-manager-smtp # create secret beforehand
+  secretName: entropy-data-smtp # create secret beforehand
   usernameKey: username
   passwordKey: password
 
@@ -31,7 +29,7 @@ sso:
   azure:
     enabled: false
     issuerUri: "https://login.microsoftonline.com/YOUR_TENANT_UUID/v2.0"
-    secretName: datamesh-manager-azure-sso # create secret beforehand
+    secretName: entropy-data-azure-sso # create secret beforehand
     clientIdKey: client-id
     clientSecretKey: client-secret
 

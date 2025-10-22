@@ -6,6 +6,7 @@ This guide shows how to install [Entropy Data](https://entropy-data.com/) to Kub
 
 - A managed postgres database (running Postgres in Kubernetes is not recommended) with pg_vector extension available
 - An SMTP server for transactional emails
+- kubectl and Helm installed
 
 ## Installation
 
@@ -19,15 +20,6 @@ Create a namespace for entropy-data in Kubernetes:
 
 ```bash
 kubectl create namespace entropy-data
-```
-
-Create a secret with the provided container registry credentials:
-
-```bash
-kubectl create secret -n entropy-data docker-registry entropy-data-registry \
-  --docker-server=ghcr.io \
-  --docker-username=<provided-username> \
-  --docker-password=<provided-password> 
 ```
 
 Create a secret with the Postgres credentials:
@@ -84,7 +76,7 @@ Example: http://<service-ip-address>:8080
 ## Ingress
 
 It is highly recommended to add an ingress with TLS protection that routes to the service.
-This Helm chart does not include an ingress resource, as the ingress and TLS configuration depends on your hoster and cluster configuration.
+This Helm chart does not include an ingress resource, as the ingress and TLS configuration depend on your hoster and cluster configuration.
 
 ## Support
 

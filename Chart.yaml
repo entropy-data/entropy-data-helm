@@ -1,7 +1,7 @@
 apiVersion: v1
-name: datamesh-manager-enterprise
+name: entropy-data
 version: 1.0.0
 appVersion: v1.0
-home: https://www.datamesh-manager.com/
+home: https://www.entropy-data.com/
 keywords:
-  - datamesh-manager
+  - entropy-data

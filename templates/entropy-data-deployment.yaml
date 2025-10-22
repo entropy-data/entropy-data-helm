@@ -1,31 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: datamesh-manager
+  name: entropy-data
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: datamesh-manager
+      app: entropy-data
   template:
     metadata:
-      name: datamesh-manager
+      name: entropy-data
       labels:
-        app: datamesh-manager
+        app: entropy-data
     spec:
-      imagePullSecrets:
-      {{- if .Values.image.registrySecretName }}
-        - name: {{ .Values.image.registrySecretName }}
-      {{- end }}  
       containers:
-        - name: datamesh-manager
+        - name: entropy-data
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 8080
           env:
             - name: DATAMESHMANAGER_HOST
-              value: {{ .Values.datameshmanager.host }}
+              value: {{ .Values.entropydata.host }}
             - name: SPRING_DATASOURCE_URL
               value: {{ .Values.database.url }}
             - name: SPRING_DATASOURCE_USERNAME
@@ -78,7 +74,7 @@ spec:
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AZURESSO_SCOPE
               value: openid,profile,email
             - name: APPLICATION_SSO_AZURE_HOSTS
-              value: {{ .Values.datameshmanager.host | trimPrefix "https://" | trimPrefix "http://" }}
+              value: {{ .Values.entropydata.host | trimPrefix "https://" | trimPrefix "http://" }}
             {{- end }}
             {{- if .Values.env }}
             {{- toYaml .Values.env | nindent 12 }}

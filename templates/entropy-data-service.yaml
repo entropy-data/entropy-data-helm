@@ -2,6 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: entropy-data
+  labels:
+    app: entropy-data
+    {{- with .Values.labels.service }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:

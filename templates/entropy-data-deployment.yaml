@@ -2,6 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: entropy-data
+  labels:
+    app: entropy-data
+    {{- with .Values.labels.deployment }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -12,7 +17,11 @@ spec:
       name: entropy-data
       labels:
         app: entropy-data
+        {{- with .Values.labels.pod }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
+      automountServiceAccountToken: {{ .Values.automountServiceAccountToken }}
       containers:
         - name: entropy-data
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"

@@ -40,6 +40,22 @@ sso:
 #     value: "variable-value"
 env: []
 
+# Additional init containers, volumes and volume mounts, e.g. to add a private CA to the JVM truststore
+# Format:
+# initContainers:
+#   - name: import-ca
+#     image: entropydata/entropy-data-ce:1.9.8
+#     command: ["sh", "-c", "cp $JAVA_HOME/lib/security/cacerts /truststore/ && keytool -importcert ..."]
+# extraVolumes:
+#   - name: truststore
+#     emptyDir: {}
+# extraVolumeMounts:
+#   - name: truststore
+#     mountPath: /truststore
+initContainers: []
+extraVolumes: []
+extraVolumeMounts: []
+
 resources:
   limits:
     cpu: 2

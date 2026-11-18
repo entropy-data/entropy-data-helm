@@ -3,7 +3,7 @@ replicaCount: 3
 image:
   pullPolicy: IfNotPresent
   name: entropydata/entropy-data-ce # use entropydata/entropy-data for enterprise version
-  tag: 1.9.8 # check latest version
+  tag: 2.1.11 # check latest version
 
 service:
   type: ClusterIP  # Can be ClusterIP, LoadBalancer, or NodePort
@@ -44,7 +44,7 @@ env: []
 # Format:
 # initContainers:
 #   - name: import-ca
-#     image: entropydata/entropy-data-ce:1.9.8
+#     image: entropydata/entropy-data-ce:2.1.11
 #     command: ["sh", "-c", "cp $JAVA_HOME/lib/security/cacerts /truststore/ && keytool -importcert ..."]
 # extraVolumes:
 #   - name: truststore
